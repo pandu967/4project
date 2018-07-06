@@ -258,7 +258,7 @@ def addSection():
         flash('Section Successfully Added!')
         return redirect(url_for('showCatalog'))
     else:
-        return render_template('addsection.html')
+        return render_template('addcategory.html')
 
 
 # Edit a category
