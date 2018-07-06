@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% include "nav.html" %}
+{% block content %}
+
+<section id="deleteItem" class="section">
+    <div class="section-content container padding-1-5">
+        <h1>Delete List</h1>
+        <p class="padding-top-10">Are you sure you want to delete list - <strong> {{list.name}} </strong>?</p>
+
+        <form action="{{url_for('deleteList', section_name = list.section.name, list_name = list.name)}}" method = "post">
+            <div class="form-group padding-top-10">
+                <button type="submit" id="submit" class="btn btn-danger">Delete</button>
+                <a href="{{url_for('showSection', section_name = list.section.name)}}">
+                    <button type="button" class="btn btn-default">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

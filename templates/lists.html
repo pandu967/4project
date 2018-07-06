@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "nav.html" %}
+{% include "flash.html" %}
+
+<!-- Page Content -->
+<section id="showItem" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            {% include "sections.html" %}
+
+            <div class="col-md-9">
+                {% if(count>1) %}
+                <p class="h3">{{section}} Lists (<strong>{{count}} lists</strong>)</p>
+                {% elif(count==0) %}
+                <p class="h3">No lists found in <strong>{{section}}</strong> <br /> click <a href="{{url_for('addList')}}">here</a> to Add Lists</p>
+
+                {% else %}
+                <p class="h3">{{section}} Lists (<strong>{{count}} list</strong>)</p>
+                {% endif %}
+            {% for i in lists %}
+              <div class="panel-group">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" href="#{{ loop.index }}">{{ i.name }}</a>
+                        <p class="h4 pull-right padding-left-10 panel-title">
+                            <a href = "{{url_for('deleteList', section_name = i.section.name, list_name = i.name)}}">Delete</a>
+                        </p>
+                        <p class="h4 pull-right panel-title">
+                            <a href = "{{url_for('editList', section_name = i.section.name, list_name = i.name)}}">Edit</a>
+                        </p>
+                    </h3>
+                  </div>
+                  <div id="{{ loop.index }}" class="panel-collapse collapse">
+                    <div class="panel-body" align="center">
+                        <img class="img-responsive" src="{{ i.picture }}" alt="{{ i.name }}">
+                        <p class="h4">{{ i.description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.section -->
+
+{% endblock %}
+
+
