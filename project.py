@@ -41,7 +41,7 @@ session = DBSession()
 @app.route('/login')
 def showLogin():
     states = ''.join(random.choice(string.ascii_uppercase +
-                    string.digits) for x in range(32))
+                                   string.digits) for x in range(32))
     login_session['states'] = states
     return render_template('login.html', STATES=states)
 
@@ -55,7 +55,8 @@ def gconnect():
     """
     # Validate state token
     if request.args.get('states') != login_session['states']:
-        responses = make_response(json.dumps('Invalid states parameters..'), 401)
+        responses =
+        make_response(json.dumps('Invalid states parameters..'), 401)
         responses.headers['Content-Type'] = 'application/json'
         return responses
     # Obtain authorization code, now compatible with Python3
@@ -93,7 +94,8 @@ def gconnect():
     gplus_id = credentials.id_token['sub']
     if result['person_id'] != gplus_id:
         responses = make_response(
-            json.dumps("Token's person ID doesn't match given person ID...."), 401)
+            json.dumps("Token's person ID doesn't "
+                       "match given person ID...."), 401)
         responses.headers['Content-Type'] = 'application/json'
         return responses
 
@@ -108,8 +110,7 @@ def gconnect():
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
         responses = make_response(json.dumps('Current person is'
-                                            'already connected....'),
-                                 200)
+                                             'already connected....'), 200)
         responses.headers['Content-Type'] = 'application/json'
         return responses
 
@@ -153,7 +154,8 @@ def createPerson(login_session):
                    'email'], picture=login_session['picture'])
     session.add(newPerson)
     session.commit()
-    person = session.query(Person).filter_by(email=login_session['email']).one()
+    person =
+    session.query(Person).filter_by(email=login_session['email']).one()
     return person.id
 
 
@@ -246,7 +248,7 @@ def showSection(section_name):
 
 # Add a category
 @app.route('/catalog/addsection', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def addSection():
     if request.method == 'POST':
         newSection = Section(
@@ -263,7 +265,7 @@ def addSection():
 
 # Edit a category
 @app.route('/catalog/<path:section_name>/c_edit', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def editSection(category_name):
     editedSection = session.query(
                                   Section).filter_by(name=category_name).one()
@@ -292,7 +294,7 @@ def editSection(category_name):
 
 # Delete a category
 @app.route('/catalog/<path:section_name>/c_delete', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def deleteSection(section_name):
     sectionToDelete = session.query(
                        Section).filter_by(name=section_name).one()
@@ -316,7 +318,7 @@ def deleteSection(section_name):
 
 # Add an item
 @app.route('/catalog/add', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def addList():
     sections = session.query(Section).all()
     if request.method == 'POST':
@@ -340,7 +342,7 @@ def addList():
 # Edit an item
 @app.route('/catalog/<path:section_name>/'
            '<path:list_name>/i_edit', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def editList(section_name, list_name):
     editedList = session.query(Lists).filter_by(name=list_name).one()
     sections = session.query(Section).all()
@@ -380,7 +382,7 @@ def editList(section_name, list_name):
 # Delete an item
 @app.route('/catalog/<path:section_name>/<path:list_name>/i_delete',
            methods=['GET', 'POST'])
-#@login_required
+# @login_required
 def deleteList(section_name, list_name):
     listToDelete = session.query(Lists).filter_by(name=list_name).one()
     section = session.query(Section).filter_by(name=section_name).one()
@@ -448,4 +450,4 @@ def ListJSON(section_name, list_name):
 # Always at end of file !Important!
 if __name__ == '__main__':
     app.secret_key = 'APP_SECRET_KEY'
-    app.run(host='0.0.0.0', debug = True,port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
