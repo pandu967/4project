@@ -27,8 +27,8 @@ session.query(Person).delete()
 
 # Create sample users
 Person1 = Person(name="venkatesh",
-             email="venkatesh.y@gmail.com",
-             picture='https://pbs.twimg.com/profile_images'
+                 email="venkatesh.y@gmail.com",
+                 picture='https://pbs.twimg.com/profile_images'
                  '/892067670970978305/_K34MGL8_400x400.jpg')
 session.add(Person1)
 session.commit()
@@ -36,27 +36,27 @@ session.commit()
 
 # Create sample categories
 Section1 = Section(name="SAMSUNG",
-                     person_id=1)
+                   person_id=1)
 session.add(Section1)
 session.commit()
 
 Section2 = Section(name="IPHONE",
-                     person_id=1)
+                   person_id=1)
 session.add(Section2)
 session.commit
 
 Section3 = Section(name="NOKIA",
-                     person_id=1)
+                   person_id=1)
 session.add(Section3)
 session.commit()
 
 Section4 = Section(name="HTC",
-                     person_id=1)
+                   person_id=1)
 session.add(Section4)
 session.commit()
 
 Section5 = Section(name="BLACKBERRY",
-                     person_id=1)
+                   person_id=1)
 session.add(Section5)
 session.commit()
 
