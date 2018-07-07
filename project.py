@@ -55,10 +55,9 @@ def gconnect():
     """
     # Validate state token
     if request.args.get('states') != login_session['states']:
-        responses =
-        make_response(json.dumps('Invalid states parameters..'), 401)
-        responses.headers['Content-Type'] = 'application/json'
-        return responses
+        response = make_response(json.dumps('Invalid parameters..'), 401)
+        response.headers['Content-Type'] = 'application/json'
+        return response
     # Obtain authorization code, now compatible with Python3
     request.get_data()
     code = request.data.decode('utf-8')
