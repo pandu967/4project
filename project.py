@@ -153,8 +153,8 @@ def createPerson(login_session):
                    'email'], picture=login_session['picture'])
     session.add(newPerson)
     session.commit()
-    person = session.query(Person)."
-    "filter_by(email=login_session['email']).one()
+    person = session.query(
+        Person).filter_by(email=login_session['email']).one()
     return person.id
 
 
